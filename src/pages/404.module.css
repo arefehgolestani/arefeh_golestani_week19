@@ -1,19 +1,19 @@
-.container{
+.not_found{
+    padding: 100px;
     text-align: center;
-    padding-top: 50px;
 }
-.container h1{
-    margin-bottom: 30px;
-}
-.container img{
+.not_found h2{
+    font-size: 26px;
     margin-bottom: 50px;
 }
-.container div a{
+.not_found a{
     padding: 10px 25px;
     border-radius: 10px;
-    margin: 10px;
     background-color: #7da3fb;
     color: #fff;
     font-size: 18px;
     border: none;
+}
+.not_found img{
+    margin: 50px;
 }

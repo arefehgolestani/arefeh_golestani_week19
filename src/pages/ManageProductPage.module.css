@@ -1,0 +1,128 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+}
+.search{
+   display: flex;
+   align-items: center;
+}
+.search svg{
+    vertical-align: middle;
+    font-size: 25px;
+}
+.search input::placeholder{
+    font-size: 16px;
+    font-weight: 400;
+}
+.search input{
+    border:none;
+    width:700px;
+    padding: 10px;
+}
+.user{
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+    border-right: 1px solid #E4E4E4;
+    padding-right: 15px;
+}
+.user div{
+    line-height: 17px;
+}
+.user img{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+
+}
+.user p{
+    font-size: 16px;
+    font-weight: 400;
+}
+.user span{
+    font-size: 14px;
+    font-weight: 300;
+}
+.container{
+    margin-top: 50px;
+}
+.container_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.container_header div img{
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+.container_header div span{
+   font-size: 24px;
+   font-weight: 400;
+}
+.container_header button{
+    background-color: #55A3F0;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-size: 16px;
+    border: none;
+}
+.product_table{
+    background-color: #fff;
+    border-radius: 30px;
+    border: 1px solid #E4E4E4;
+    min-height: 500px;
+    margin-top: 15px;
+}
+table{
+    width: 100%;
+    text-align: center;
+}
+table thead tr th{
+    background-color: #F2F2F2;
+    padding: 20px 10px;
+    font-size: 15px;
+    font-weight: 500;
+}
+table thead th:first-child {
+    border-top-right-radius: 30px ;
+}
+table thead th:last-child {
+    border-top-left-radius: 30px ;
+}
+table tbody tr td{
+    border-bottom: 1px solid #F2F2F2;
+    padding: 10px 10px;
+}
+table tbody tr td button{
+    border: none;
+    background-color: transparent;
+    margin: 10px;
+}
+.pagination{
+    text-align: center;
+    margin-top: 50px;
+    direction: rtl;
+}
+.pagination span{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    padding: 14px 20px;
+    margin: 0 5px;
+    border: 2px solid #8D8D8D80;
+    color: #8D8D8D80;
+}
+.active{
+    background-color: #55A3F0;
+    border-color:#55A3F0 !important;
+    color: #fff !important;
+}
