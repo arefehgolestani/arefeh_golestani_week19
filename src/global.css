@@ -54,6 +54,6 @@ input{
   color: #fff;
 }
 input:focus{
-  outline: 1px dashed #8dae95;
+  outline: none;
 }
 
