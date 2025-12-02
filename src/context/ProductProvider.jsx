@@ -12,6 +12,11 @@ function ProductProvider({children}) {
   const [products, setProducts] = useState([]);
   const [alert, setAlert] = useState(null);
   const [modal, setModal] = useState(null);
+  
+  const [token, setToken] = useState(() => {
+    const saved = localStorage.getItem("token");
+    return saved ? saved : "";
+  });
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,11 +28,16 @@ function ProductProvider({children}) {
       }    
     }
     fetchProducts()
-  } , [])
+  } , []);
+
+  useEffect(() => {
+    localStorage.setItem("token", token);
+  }, [token]);
+
     
   return (
     <ProductContext.Provider
-      value={{products, setProducts,alert,
+      value={{products, setProducts,alert,token, setToken,
         setAlert,
         modal,
         setModal,}}

@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import axios from "axios"
-import ProductContext from "../context/ProductContext";
 
+
+import ProductContext from "../context/ProductContext";
 import styles from "./RegisterPage.module.css"
-import inputs from "../constants/inputs.js";
+import {registerInputs} from "../constants/inputs.js";
 import logo from "../assets/image/Union.png"
 import { registerUser } from "../services/ProductApi";
 import Alert from "../components/Alert";
@@ -29,6 +30,7 @@ function RegisterPage() {
         .oneOf([Yup.ref("password"), null], "رمزهای عبور یکسان نیستند")
         .required("تکرار رمز عبور الزامی است"),
   });
+
   const {
     register,
     handleSubmit,
@@ -64,8 +66,7 @@ function RegisterPage() {
         message: "خطا در ثبت ‌نام !",
         duration: 2500
       });
-    }
-    
+    } 
   }
 
   return (
@@ -83,14 +84,13 @@ function RegisterPage() {
         <h3>فرم ثبت نام</h3>
         <div className={styles.register_form}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {inputs.map((input) => (
+          {registerInputs.map((input) => (
             <div  key={input.name}>
-             <input type={input.type}  {...register(input.name)} name={input.name} placeholder={input.placeholder} />
+             <input type={input.type} {...register(input.name)} name={input.name} placeholder={input.placeholder} />
              <p className={styles.error}>{errors[input.name]?.message}</p>
             </div>
            
          ))}
-
           <button type="submit">ثبت نام</button>
           </form>
           <span>حساب کاربری دارید؟</span>

@@ -7,6 +7,7 @@ import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import PageNoteFound from "./pages/404";
 import ProductProvider from "./context/ProductProvider";
+import PrivateRoutes from "./services/PrivateRoutes"
 
 function App() {
   
@@ -16,7 +17,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/panel" element={<ManageProductPage />} />
+        <Route element={<PrivateRoutes/>}>
+          <Route path="/panel" element={<ManageProductPage />} />
+        </Route>
+        
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<PageNoteFound />} />

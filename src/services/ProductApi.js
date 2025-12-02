@@ -5,7 +5,11 @@ const getProductList = () => {
 };
 
 const registerUser = () => {
-    return `${BASE_URL}/auth/register`
-}
+  return `${BASE_URL}/auth/register`;
+};
 
-export { getProductList, registerUser };
+const loginUser = () => {
+  return `${BASE_URL}/auth/login`;
+};
+
+export { getProductList, registerUser, loginUser };
