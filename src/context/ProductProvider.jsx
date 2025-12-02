@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 import ProductContext from "./ProductContext";
 import Modal from "../components/Modal.jsx";
@@ -13,17 +14,15 @@ function ProductProvider({children}) {
   const [modal, setModal] = useState(null);
 
   useEffect(() => {
-    const fetchProduct = async () => {
+    const fetchProducts = async () => {
       try {
-        const res = await fetch(getProductList());
-      const data = await res.json();
-      setProducts(data.data)
+        const res = await axios.get(getProductList());
+        setProducts(res.data.data)
       } catch (error) {
         console.log("Error fetching contacts:", error);
-      }
-      
+      }    
     }
-    fetchProduct()
+    fetchProducts()
   } , [])
     
   return (
@@ -40,7 +39,7 @@ function ProductProvider({children}) {
           type={alert.type}
           message={alert.message}
           duration={alert.duration || 2000}
-          onClose={() => dispatch({ type: "CLEAR_ALERT" })}
+          onClose={() => setAlert(null)}
         />
       )}
 
@@ -51,7 +50,7 @@ function ProductProvider({children}) {
           confirmText={modal.confirmText}
           cancelText={modal.cancelText}
           onConfirm={modal.onConfirm}
-          onCancel={() => dispatch({ type: "CLEAR_MODAL" })}
+          onCancel={() => setModal(null)}
         />
       )}
     </ProductContext.Provider>

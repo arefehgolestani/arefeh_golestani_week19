@@ -4,4 +4,8 @@ const getProductList = () => {
   return `${BASE_URL}/products?page=1&limit=10`;
 };
 
-export { getProductList };
+const registerUser = () => {
+    return `${BASE_URL}/auth/register`
+}
+
+export { getProductList, registerUser };

@@ -1,10 +1,23 @@
+import { useContext } from "react";
+import ProductContext from "../context/ProductContext";
 import styles from "./LoginPage.module.css"
 import logo from "../assets/image/Union.png"
+import Alert from "../components/Alert"
 
 
 function LoginPage() {
+  const {
+    setAlert
+  } = useContext(ProductContext);
   return (
     <div className={styles.login_container}>
+       {alert && (
+        <Alert
+          type={alert.type}
+          message={alert.message}
+          onClose={() => setAlert(null)}
+        />
+      )}
       <h2>بوت کمپ بوتواستارت</h2>
       <div className={styles.login_box}>
         <img src={logo} />

@@ -3,7 +3,6 @@ import { CiSearch } from "react-icons/ci";
 
 import styles from "./ManageProductPage.module.css"
 import avatar1 from "../assets/image/avatar1.jpg"
-import avatar2 from "../assets/image/avatar2.jpg"
 import manage from "../assets/image/manage.png"
 import trash from "../assets/image/trash.svg"
 import edit from "../assets/image/edit.png"

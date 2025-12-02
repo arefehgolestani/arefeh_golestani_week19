@@ -3,7 +3,7 @@
 }
 .register_box{
     width: 460px;
-    height: 500px;
+    height: 550px;
     padding: 30px;
     background-color: #fff;
     border-radius: 40px;
@@ -49,4 +49,10 @@
     font-weight: 400;
     color: #3A8BED;
     margin-top: 3px;
+}
+.error{
+    color: red;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
 }
