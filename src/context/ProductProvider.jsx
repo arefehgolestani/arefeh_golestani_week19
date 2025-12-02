@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import ProductContext from "./ProductContext";
 import Modal from "../components/Modal.jsx";
 import Alert from "../components/Alert.jsx";
+import { getProductList } from "../services/ProductApi";
 
-const API_URL = "http://localhost:3000/products?page=1&limit=10";
 
 function ProductProvider({children}) {
 
@@ -15,9 +15,9 @@ function ProductProvider({children}) {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(API_URL);
+        const res = await fetch(getProductList());
       const data = await res.json();
-      setProducts(data)
+      setProducts(data.data)
       } catch (error) {
         console.log("Error fetching contacts:", error);
       }
@@ -25,7 +25,6 @@ function ProductProvider({children}) {
     }
     fetchProduct()
   } , [])
-  console.log(products)
     
   return (
     <ProductContext.Provider
