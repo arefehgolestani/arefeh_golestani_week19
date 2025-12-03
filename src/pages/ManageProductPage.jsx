@@ -6,18 +6,53 @@ import avatar1 from "../assets/image/avatar1.jpg"
 import manage from "../assets/image/manage.png"
 import trash from "../assets/image/trash.svg"
 import edit from "../assets/image/edit.png"
+import Modal from "../components/Modal";
 
 import ProductContext from "../context/ProductContext";
+import ProductForm from "../components/ProductForm";
+import Alert from "../components/Alert";
 
 function ManageProductPage() {
   const {
     products,
     setProducts,
     alert,
+    setAlert,
     modal,
+    setModal
   } = useContext(ProductContext);
+
+  const addHandler = () => {
+    setModal({
+      title: "ایجاد محصول جدید",
+      mode: "add",
+      children: <ProductForm />,
+      confirmText: "ایجاد محصول",
+      cancelText: "انصراف",
+      onConfirm: CreateProductHandler,
+    });
+  }
+   
+  const CreateProductHandler = ( ) => {
+    console.log("first");
+    setModal(null)
+    setAlert({
+      type: "success",
+      message: "محصول جدید با موفقیت افزوده شد",
+      duration: 2000
+    });
+  }
+  
+
   return (
     <div>
+       {alert && (
+        <Alert
+          type={alert.type}
+          message={alert.message}
+          onClose={() => setAlert(null)}
+        />
+      )}
       <div className={styles.header}>
         <div className={styles.search}>
           <label><CiSearch /></label>
@@ -37,7 +72,7 @@ function ManageProductPage() {
             <img src={manage} />
             <span>مدیریت کالا</span>
           </div>
-          <button>افزودن محصول</button>
+          <button onClick={addHandler}>افزودن محصول</button>
         </div>
         <div className={styles.product_table}>
            <table>
@@ -81,6 +116,19 @@ function ManageProductPage() {
       
            </div>
       </div>
+      {modal && (
+        <Modal
+          title={modal.title}
+          mode={modal.mode}
+          message={modal.message}
+          confirmText={modal.confirmText}
+          cancelText={modal.cancelText}
+          onConfirm={modal.onConfirm}
+          onCancel={() => setModal(null)}
+        >
+          {modal.children}
+        </Modal>
+      )}
     </div>
   )
 }

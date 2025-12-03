@@ -10,7 +10,7 @@ import ProductContext from "../context/ProductContext";
 import styles from "./RegisterPage.module.css"
 import {registerInputs} from "../constants/inputs.js";
 import logo from "../assets/image/Union.png"
-import { registerUser } from "../services/ProductApi";
+import { registerUser } from "../services/EndpointApi";
 import Alert from "../components/Alert";
 import api from "../services/config";
 

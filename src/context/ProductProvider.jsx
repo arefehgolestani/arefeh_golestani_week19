@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 import ProductContext from "./ProductContext";
 import Modal from "../components/Modal.jsx";
 import Alert from "../components/Alert.jsx";
-import { getProductList } from "../services/ProductApi";
+import { getProductList } from "../services/EndpointApi";
 import api from "../services/config";
 
 
@@ -55,16 +54,7 @@ function ProductProvider({children}) {
         />
       )}
 
-      {modal && (
-        <Modal
-          title={modal.title}
-          message={modal.message}
-          confirmText={modal.confirmText}
-          cancelText={modal.cancelText}
-          onConfirm={modal.onConfirm}
-          onCancel={() => setModal(null)}
-        />
-      )}
+     
     </ProductContext.Provider>
   )
 }
