@@ -7,7 +7,7 @@ import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import PageNoteFound from "./pages/404";
 import ProductProvider from "./context/ProductProvider";
-import PrivateRoutes from "./services/PrivateRoutes"
+import PrivateRoutes from "./components/PrivateRoutes"
 
 function App() {
   

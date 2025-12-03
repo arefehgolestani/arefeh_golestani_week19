@@ -5,6 +5,8 @@ import ProductContext from "./ProductContext";
 import Modal from "../components/Modal.jsx";
 import Alert from "../components/Alert.jsx";
 import { getProductList } from "../services/ProductApi";
+import api from "../services/config";
+
 
 
 function ProductProvider({children}) {
@@ -21,11 +23,11 @@ function ProductProvider({children}) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(getProductList());
-        setProducts(res.data.data)
+        const res = await api.get(getProductList());
+        setProducts(res.data.data);
       } catch (error) {
-        console.log("Error fetching contacts:", error);
-      }    
+        console.log("Error fetching products:", error);
+      }
     }
     fetchProducts()
   } , []);

@@ -12,6 +12,7 @@ import Alert from "../components/Alert";
 
 import styles from "./LoginPage.module.css"
 import logo from "../assets/image/Union.png"
+import api from "../services/config";
 
 
 function LoginPage() {
@@ -44,7 +45,7 @@ const navigate = useNavigate();
 
   const onSubmit = async ({username, password}) => {
     try {
-      const res = await axios.post(loginUser(), { username, password });
+      const res = await api.post(loginUser(), { username, password });
       setToken(res.data.token)
     
       setAlert({

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -12,6 +12,7 @@ import {registerInputs} from "../constants/inputs.js";
 import logo from "../assets/image/Union.png"
 import { registerUser } from "../services/ProductApi";
 import Alert from "../components/Alert";
+import api from "../services/config";
 
 
 function RegisterPage() {
@@ -51,7 +52,7 @@ function RegisterPage() {
 
   const onSubmit = async ({username, password}) => {
     try {
-      const res = await axios.post(registerUser(), { username, password });
+      const res = await api.post(registerUser(), { username, password });
       setAlert({
         type: "success",
         message: "ثبت نام شما با موفقیت انجام شد ",
@@ -93,7 +94,7 @@ function RegisterPage() {
          ))}
           <button type="submit">ثبت نام</button>
           </form>
-          <span>حساب کاربری دارید؟</span>
+          <Link to="/login"><span>حساب کاربری دارید؟</span></Link>
         </div>
         
       </div>
