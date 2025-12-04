@@ -17,3 +17,7 @@
     border-color:#55A3F0 !important;
     color: #fff !important;
 }
+.disabled{
+    opacity: 0.4;
+    cursor: auto;
+}

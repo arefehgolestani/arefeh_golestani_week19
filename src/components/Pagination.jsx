@@ -22,7 +22,7 @@ function Pagination() {
 
   return (
     <div className={styles.pagination} >
-    <button onClick={prevHandler}>قبلی</button>
+    <button className={page === 1 ? styles.disabled : null} onClick={prevHandler}>قبلی</button>
     {Array.from({ length: totalPages }).map((_, i) => (
   <button
     key={i}
@@ -32,7 +32,7 @@ function Pagination() {
     {i + 1}
   </button>
 ))}
-    <button onClick={nextHandler}>بعدی</button>
+    <button className={page === totalPages ? styles.disabled : null} onClick={nextHandler}>بعدی</button>
     
     </div>
   )

@@ -9,4 +9,10 @@ const loginInputs = [
   { type: "password", name: "password", placeholder: "رمز عبور  " }
 ];
 
-export {registerInputs, loginInputs};
+const modalInputs = [
+  { type: "text", name: "name", placeholder: "نام کالا" },
+  { type: "text", name: "quantity", placeholder: "تعداد موجودی" },
+  { type: "text", name: "price", placeholder: "قیمت" },
+];
+
+export {registerInputs, loginInputs, modalInputs};

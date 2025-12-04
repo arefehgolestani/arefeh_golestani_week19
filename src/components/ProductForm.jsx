@@ -4,6 +4,7 @@ import * as Yup from "yup";
 
 import styles from "./ProductForm.module.css"
 import { useEffect } from "react";
+import { modalInputs } from "../constants/inputs";
 
 function ProductForm({onSubmitForm, submitRef}) {
 
@@ -57,22 +58,13 @@ function ProductForm({onSubmitForm, submitRef}) {
   return (
     <div className={styles.container}>
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className={styles.inputs}>
-                <label>نام کالا</label>
-                <input type="text" {...register("name")} name="name" placeholder="نام کالا" />
-                <p className={styles.error}>{errors["name"]?.message}</p>
-            </div>
-            <div className={styles.inputs}>
-                <label>تعداد موجودی</label>
-                <input type="text" {...register("quantity")} name="quantity" placeholder="تعداد موجودی" />
-                <p className={styles.error}>{errors["quantity"]?.message}</p>
-            </div>
-            <div className={styles.inputs}>
-                <label>قیمت</label>
-                <input type="text" {...register("price")} name="price" placeholder="قیمت" />
-                <p className={styles.error}>{errors["price"]?.message}</p>
-            </div>
-            {/* <button type="submit"></button> */}
+          {modalInputs.map((input) => (
+             <div className={styles.inputs} key={input.name}>
+             <label>{input.placeholder}</label>
+             <input type={input.type} {...register(input.name)} name={input.name} placeholder={input.placeholder} />
+             <p className={styles.error}>{errors[input.name]?.message}</p>
+         </div>
+          ))}
         </form>
     </div>
   )
