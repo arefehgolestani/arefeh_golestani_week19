@@ -1,6 +1,6 @@
 
-const getProductList = () => {
-  return "/products?page=1&limit=10";
+const getProductList = (page) => {
+  return `/products?page=${page}&limit=5`;
 };
 
 const registerUser = () => {

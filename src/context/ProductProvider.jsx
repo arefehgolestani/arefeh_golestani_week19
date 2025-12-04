@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 import ProductContext from "./ProductContext";
 import Modal from "../components/Modal.jsx";
@@ -19,17 +19,27 @@ function ProductProvider({children}) {
     return saved ? saved : "";
   });
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await api.get(getProductList());
-        setProducts(res.data.data);
-      } catch (error) {
-        console.log("Error fetching products:", error);
-      }
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+
+  const fetchProducts = useCallback(async () => {
+    try {
+      const res = await api.get(getProductList(page));
+      
+      setProducts(res.data.data);
+      setTotalPages(res.data.totalPages);
+
+
+    } catch (error) {
+      console.log("Error fetching products:", error);
     }
-    fetchProducts()
-  } , [products]);
+  }, [page]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
 
   useEffect(() => {
     localStorage.setItem("token", token);
@@ -41,7 +51,7 @@ function ProductProvider({children}) {
       value={{products, setProducts,alert,token, setToken,
         setAlert,
         modal,
-        setModal,}}
+        setModal,page, setPage, totalPages, fetchProducts}}
     >
       {children}
 

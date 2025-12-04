@@ -16,6 +16,7 @@ import Alert from "../components/Alert";
 import { createProduct, deleteProduct } from "../services/EndpointApi";
 import api from "../services/config";
 import Search from "../components/Search";
+import Pagination from "../components/Pagination";
 
 
 
@@ -26,12 +27,14 @@ function ManageProductPage() {
     alert,
     setAlert,
     modal,
-    setModal
+    setModal, 
+    fetchProducts
   } = useContext(ProductContext);
 
 
   const [newProduct, setNewProduct] = useState({});
   const [search, setSearch] = useState("");
+  
 
   const addHandler = () => {
     setModal({
@@ -59,6 +62,7 @@ function ManageProductPage() {
     if (!result) return;
   
     await api.post(createProduct(), result);
+    fetchProducts();
   
     setModal(null);
     setAlert({
@@ -88,6 +92,7 @@ function ManageProductPage() {
   const deleteProductHandler = async (id) => {
 
   await api.delete(deleteProduct(id));
+  fetchProducts();
 
     setModal(null);
     setAlert({
@@ -173,24 +178,11 @@ function ManageProductPage() {
                 )}
            </>
           )}
-
-
-
-
-
-
-              
-                
              </tbody>
            </table>
            
         </div>
-        <div className={styles.pagination} >
-             <span>3</span>
-             <span>2</span>
-             <span className={styles.active}>1</span>
-      
-           </div>
+       <Pagination />
       </div>
       {modal && (
         <Modal
