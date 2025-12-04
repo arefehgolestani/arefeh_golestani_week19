@@ -47,6 +47,7 @@ function ProductProvider({children}) {
 
       {alert && (
         <Alert
+          key={alert.message} 
           type={alert.type}
           message={alert.message}
           duration={alert.duration || 2000}

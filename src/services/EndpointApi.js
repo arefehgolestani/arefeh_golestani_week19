@@ -1,6 +1,6 @@
 
 const getProductList = () => {
-  return "/products?page=1&limit=5";
+  return "/products?page=1&limit=10";
 };
 
 const registerUser = () => {
@@ -15,4 +15,9 @@ const createProduct = () => {
   return "/products";
 }
 
-export { getProductList, registerUser, loginUser, createProduct };
+const deleteProduct = (id) => {
+  return `/products/${id}`
+}
+
+export { getProductList, registerUser, loginUser, createProduct, deleteProduct
+ };

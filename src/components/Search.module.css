@@ -1,0 +1,17 @@
+.search{
+    display: flex;
+    align-items: center;
+ }
+ .search svg{
+     vertical-align: middle;
+     font-size: 25px;
+ }
+ .search input::placeholder{
+     font-size: 16px;
+     font-weight: 400;
+ }
+ .search input{
+     border:none;
+     width:700px;
+     padding: 10px;
+ }
