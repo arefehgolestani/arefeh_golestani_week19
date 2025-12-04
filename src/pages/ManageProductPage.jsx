@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 
 import styles from "./ManageProductPage.module.css"
@@ -11,6 +11,10 @@ import Modal from "../components/Modal";
 import ProductContext from "../context/ProductContext";
 import ProductForm from "../components/ProductForm";
 import Alert from "../components/Alert";
+import { createProduct } from "../services/EndpointApi";
+import api from "../services/config";
+
+
 
 function ManageProductPage() {
   const {
@@ -22,26 +26,47 @@ function ManageProductPage() {
     setModal
   } = useContext(ProductContext);
 
+  const [newProduct, setNewProduct] = useState({})
+
   const addHandler = () => {
     setModal({
       title: "ایجاد محصول جدید",
       mode: "add",
-      children: <ProductForm />,
+      children: <ProductForm onSubmitForm={onSubmitForm} submitRef={submitRef} />,
       confirmText: "ایجاد محصول",
       cancelText: "انصراف",
       onConfirm: CreateProductHandler,
     });
   }
+  const submitRef = useRef(null)
+
+  const onSubmitForm = (data) => {
+    setNewProduct(data);
+  }
    
-  const CreateProductHandler = ( ) => {
-    console.log("first");
-    setModal(null)
+  const CreateProductHandler = async () => {
+   try {
+    const result = await submitRef.current();
+    if (!result) return;
+  
+    await api.post(createProduct(), result);
+    
+    // await fetchProducts();
+    // setProducts(prev => [...prev, response.data]);
+  
+    setModal(null);
     setAlert({
       type: "success",
       message: "محصول جدید با موفقیت افزوده شد",
       duration: 2000
     });
-  }
+   } catch (error) {
+     console.log(error)
+     console.log(error.response?.data)
+   }
+  };
+
+
   
 
   return (
@@ -132,5 +157,6 @@ function ManageProductPage() {
     </div>
   )
 }
+
 
 export default ManageProductPage

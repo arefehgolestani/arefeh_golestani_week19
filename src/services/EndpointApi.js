@@ -1,6 +1,6 @@
 
 const getProductList = () => {
-  return "/products?page=1&limit=10";
+  return "/products?page=1&limit=5";
 };
 
 const registerUser = () => {
@@ -11,4 +11,8 @@ const loginUser = () => {
   return "/auth/login";
 };
 
-export { getProductList, registerUser, loginUser };
+const createProduct = () => {
+  return "/products";
+}
+
+export { getProductList, registerUser, loginUser, createProduct };

@@ -42,12 +42,12 @@ input{
   padding: 0 10px;
 }
 .success{
-  background-color: #0a9e0a;
+  background-color: #55A3F0;
   color: #fff;
 }
 .warning{
-    background-color: orange;
-    color: #fff;
+    background-color: #DFDFDF;
+    color: #282828CC;
 }
 .danger{
   background-color: #e81f1f;

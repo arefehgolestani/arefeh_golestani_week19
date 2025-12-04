@@ -29,7 +29,7 @@ function ProductProvider({children}) {
       }
     }
     fetchProducts()
-  } , []);
+  } , [products]);
 
   useEffect(() => {
     localStorage.setItem("token", token);
