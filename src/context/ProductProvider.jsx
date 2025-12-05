@@ -1,10 +1,11 @@
 import { useEffect, useState, useCallback } from "react";
 
 import ProductContext from "./ProductContext";
-import Modal from "../components/Modal.jsx";
 import Alert from "../components/Alert.jsx";
 import { getProductList } from "../services/EndpointApi";
 import api from "../services/config";
+import { generateProductCode } from "../helper/helper";
+
 
 
 
@@ -13,6 +14,7 @@ function ProductProvider({children}) {
   const [products, setProducts] = useState([]);
   const [alert, setAlert] = useState(null);
   const [modal, setModal] = useState(null);
+  const [user, setUser] = useState(null);
   
   const [token, setToken] = useState(() => {
     const saved = localStorage.getItem("token");
@@ -26,15 +28,29 @@ function ProductProvider({children}) {
   const fetchProducts = useCallback(async () => {
     try {
       const res = await api.get(getProductList(page));
-      
-      setProducts(res.data.data);
-      setTotalPages(res.data.totalPages);
 
+      const savedCodes = JSON.parse(localStorage.getItem("productCodes") || "{}");
+  
+    const updated = res.data.data.map(p => {
+      if (!savedCodes[p.id]) {
+        savedCodes[p.id] = generateProductCode();
+      }
+      return {
+        ...p,
+        productCode: savedCodes[p.id]
+      };
+    });
+  
+    localStorage.setItem("productCodes", JSON.stringify(savedCodes));
+
+      setProducts(updated);
+      setTotalPages(res.data.totalPages);
 
     } catch (error) {
       console.log("Error fetching products:", error);
     }
   }, [page]);
+
 
   useEffect(() => {
     fetchProducts();
@@ -51,7 +67,7 @@ function ProductProvider({children}) {
       value={{products, setProducts,alert,token, setToken,
         setAlert,
         modal,
-        setModal,page, setPage, totalPages, fetchProducts}}
+        setModal,page, setPage, totalPages, fetchProducts, user, setUser}}
     >
       {children}
 

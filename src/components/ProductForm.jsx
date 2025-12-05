@@ -6,7 +6,7 @@ import styles from "./ProductForm.module.css"
 import { useEffect } from "react";
 import { modalInputs } from "../constants/inputs";
 
-function ProductForm({onSubmitForm, submitRef}) {
+function ProductForm({onSubmitForm, submitRef, defaultValues = {}}) {
 
     const validationSchema = Yup.object({
         name: Yup.string().required("وارد کردن نام محصول الزامی است"),
@@ -22,7 +22,8 @@ function ProductForm({onSubmitForm, submitRef}) {
       trigger,
       handleSubmit,
       formState: { errors },
-      getValues
+      getValues, 
+      reset,
     } = useForm({
       resolver: yupResolver(validationSchema),
       mode: "onChange",
@@ -30,8 +31,13 @@ function ProductForm({onSubmitForm, submitRef}) {
         name: "",
         quantity: "",
         price:"",
+        ...defaultValues,
       }
     });
+
+    useEffect(() => {
+      reset(defaultValues);
+    }, [defaultValues, reset]);
 
   
 

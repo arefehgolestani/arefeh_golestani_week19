@@ -13,10 +13,11 @@ import Modal from "../components/Modal";
 import ProductContext from "../context/ProductContext";
 import ProductForm from "../components/ProductForm";
 import Alert from "../components/Alert";
-import { createProduct, deleteProduct } from "../services/EndpointApi";
+import { createProduct, deleteProduct, editProduct } from "../services/EndpointApi";
 import api from "../services/config";
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
+
 
 
 
@@ -60,8 +61,8 @@ function ManageProductPage() {
    try {
     const result = await submitRef.current();
     if (!result) return;
-  
-    await api.post(createProduct(), result);
+   
+   await api.post(createProduct, result);
     fetchProducts();
   
     setModal(null);
@@ -92,7 +93,7 @@ function ManageProductPage() {
   const deleteProductHandler = async (id) => {
 
   await api.delete(deleteProduct(id));
-  fetchProducts();
+    fetchProducts();
 
     setModal(null);
     setAlert({
@@ -101,6 +102,48 @@ function ManageProductPage() {
       duration: 2000
     });
   }
+
+const editHandler = (id) => {
+  const selectedProduct = products.find((p) => p.id === id);
+
+  setModal({
+    title: "ویرایش اطلاعات",
+    mode: "edit",
+    children: (
+      <ProductForm
+        onSubmitForm={onSubmitForm}
+        submitRef={submitRef}
+        defaultValues={selectedProduct} 
+      />
+    ),
+    confirmText: "ثبت اطلاعات جدید",
+    cancelText: "انصراف",
+    onConfirm: () => editProductHandler(id),
+  });
+}
+
+const editProductHandler = async (id) => {
+  try {
+    const result = await submitRef.current();
+    if (!result) return;
+   
+   await api.put(editProduct(id), result);
+    fetchProducts();
+  
+    setModal(null);
+    setAlert({
+      type: "success",
+      message: "ویرایش با موفقیت انجام شد",
+      duration: 2000
+    });
+   } catch (error) {
+     console.log(error)
+   }
+
+}
+
+
+  
 
   const filteredProducts = search
     ? products.filter((product) => {
@@ -168,9 +211,9 @@ function ManageProductPage() {
                   <td>{product.name}</td>
                    <td>{product.quantity}</td>
                    <td>{product.price}</td>
-                   <td>{product.id}</td>
+                   <td>{product.productCode}</td>
                    <td>
-                     <button><img src={edit} /></button>
+                     <button onClick={() => editHandler(product.id)}><img src={edit} /></button>
                      <button onClick={() => deleteHandler(product.id)}><img src={trash} /></button>
                    </td>
                   </tr>

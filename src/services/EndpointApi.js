@@ -1,4 +1,3 @@
-
 const getProductList = (page) => {
   return `/products?page=${page}&limit=5`;
 };
@@ -13,11 +12,23 @@ const loginUser = () => {
 
 const createProduct = () => {
   return "/products";
-}
+};
 
 const deleteProduct = (id) => {
-  return `/products/${id}`
+  return `/products/${id}`;
+};
+
+
+
+const editProduct = (id) => {
+  return `/products/${id}`;
 }
 
-export { getProductList, registerUser, loginUser, createProduct, deleteProduct
- };
+export {
+  getProductList,
+  registerUser,
+  loginUser,
+  createProduct,
+  deleteProduct,
+  editProduct
+};
