@@ -37,7 +37,7 @@ function ProductForm({onSubmitForm, submitRef, defaultValues = {}}) {
 
     useEffect(() => {
       reset(defaultValues);
-    }, [defaultValues, reset]);
+    }, []);
 
   
 

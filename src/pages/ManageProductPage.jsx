@@ -62,7 +62,7 @@ function ManageProductPage() {
     const result = await submitRef.current();
     if (!result) return;
    
-   await api.post(createProduct, result);
+   await api.post(createProduct(), result);
     fetchProducts();
   
     setModal(null);
