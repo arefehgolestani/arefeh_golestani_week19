@@ -1,10 +1,13 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-import styles from "./ProductForm.module.css";
-import { useEffect } from "react";
 import { modalInputs } from "../constants/inputs";
+
+import styles from "./ProductForm.module.css";
+
+
 
 function ProductForm({ onSubmitForm, submitRef, defaultValues = {} }) {
   const validationSchema = Yup.object({

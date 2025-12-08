@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import styles from "./Alert.module.css";
 
 function Alert({ type = "success", message, onClose, duration = 2000 }) {

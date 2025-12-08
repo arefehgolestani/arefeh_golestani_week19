@@ -1,6 +1,7 @@
 import { useContext } from "react";
 
 import ProductContext from "../context/ProductContext";
+
 import styles from "./Pagination.module.css";
 
 function Pagination() {

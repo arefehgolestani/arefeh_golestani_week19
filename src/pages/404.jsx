@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import styles from "./404.module.css";
+
 import img1 from "../assets/image/404.webp";
+
+import styles from "./404.module.css";
 
 function PageNoteFound() {
   return (

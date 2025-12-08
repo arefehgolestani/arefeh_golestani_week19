@@ -2,17 +2,11 @@ const getProductList = (page) => {
   return `/products?page=${page}&limit=10`;
 };
 
-const registerUser = () => {
-  return "/auth/register";
-};
+const registerUser = "/auth/register";
 
-const loginUser = () => {
-  return "/auth/login";
-};
+const loginUser = "/auth/login";
 
-const createProduct = () => {
-  return "/products";
-};
+const createProduct = "/products";
 
 const deleteProduct = (id) => {
   return `/products/${id}`;

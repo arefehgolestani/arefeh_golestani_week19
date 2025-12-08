@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 
 import ProductContext from "./ProductContext";
 import Alert from "../components/Alert.jsx";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import { getProductList } from "../services/EndpointApi";
 import api from "../services/config";
 import { generateProductCode } from "../helper/helper";
@@ -11,40 +12,30 @@ function ProductProvider({ children }) {
   const [search, setSearch] = useState("");
   const [alert, setAlert] = useState(null);
   const [modal, setModal] = useState(null);
-  const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem("username");
-    return savedUser ? savedUser : "";
-  });
-
-  const [token, setToken] = useState(() => {
-    const saved = localStorage.getItem("token");
-    return saved ? saved : "";
-  });
-
+  const [user, setUser] = useLocalStorage("username", "");
+  const [token, setToken] = useLocalStorage("token", "");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [productCodes, setProductCodes] = useLocalStorage("productCodes", "{}");
 
   const fetchProducts = useCallback(async () => {
     try {
       const url = search !== "" ? "/products" : getProductList(page);
       const res = await api.get(url);
 
-      const savedCodes = JSON.parse(
-        localStorage.getItem("productCodes") || "{}"
-      );
+      const updatedCodes = { ...productCodes };
 
       const updated = res.data.data.map((p) => {
-        if (!savedCodes[p.id]) {
-          savedCodes[p.id] = generateProductCode();
+        if (!updatedCodes[p.id]) {
+          updatedCodes[p.id] = generateProductCode();
         }
         return {
           ...p,
-          productCode: savedCodes[p.id],
+          productCode: updatedCodes[p.id],
         };
       });
 
-      localStorage.setItem("productCodes", JSON.stringify(savedCodes));
-
+      setProductCodes(updatedCodes);
       setProducts(updated);
       setTotalPages(res.data.totalPages);
     } catch (error) {
@@ -55,14 +46,6 @@ function ProductProvider({ children }) {
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
-
-  useEffect(() => {
-    localStorage.setItem("token", token);
-  }, [token]);
-
-  useEffect(() => {
-    localStorage.setItem("username", user);
-  }, [user]);
 
   return (
     <ProductContext.Provider

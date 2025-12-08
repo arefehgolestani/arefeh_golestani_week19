@@ -1,7 +1,8 @@
 import { useContext } from "react";
+import { CiSearch } from "react-icons/ci";
+
 import ProductContext from "../context/ProductContext";
 
-import { CiSearch } from "react-icons/ci";
 import styles from "./Search.module.css";
 
 function Search() {

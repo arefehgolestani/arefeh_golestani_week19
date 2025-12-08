@@ -8,10 +8,11 @@ import ProductContext from "../context/ProductContext";
 import { loginUser } from "../services/EndpointApi";
 import { loginInputs } from "../constants/inputs";
 import Alert from "../components/Alert";
-
-import styles from "./LoginPage.module.css";
 import logo from "../assets/image/Union.png";
 import api from "../services/config";
+
+import styles from "./LoginPage.module.css";
+
 
 function LoginPage() {
   const { setAlert, setToken, token, user, setUser } =
@@ -40,7 +41,7 @@ function LoginPage() {
 
   const onSubmit = async ({ username, password }) => {
     try {
-      const res = await api.post(loginUser(), { username, password });
+      const res = await api.post(loginUser, { username, password });
       setToken(res.data.token);
       setUser(username);
       localStorage.setItem("username", username);

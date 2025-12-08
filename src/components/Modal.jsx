@@ -1,4 +1,5 @@
 import { IoCloseCircle } from "react-icons/io5";
+
 import styles from "./Modal.module.css";
 
 function Modal({

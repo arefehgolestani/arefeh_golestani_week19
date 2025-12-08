@@ -17,7 +17,7 @@
     padding-right: 15px;
 }
 .user div{
-    line-height: 17px;
+    line-height: 20px;
 }
 .user img{
     width: 46px;
@@ -30,8 +30,11 @@
     font-weight: 400;
 }
 .user span{
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 300;
+}
+.user svg{
+    vertical-align: middle;
 }
 .container{
     margin-top: 50px;

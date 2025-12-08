@@ -3,15 +3,15 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import axios from "axios";
 
 import ProductContext from "../context/ProductContext";
-import styles from "./RegisterPage.module.css";
-import { registerInputs } from "../constants/inputs.js";
-import logo from "../assets/image/Union.png";
 import { registerUser } from "../services/EndpointApi";
+import { registerInputs } from "../constants/inputs.js";
 import Alert from "../components/Alert";
 import api from "../services/config";
+import logo from "../assets/image/Union.png";
+
+import styles from "./RegisterPage.module.css";
 
 function RegisterPage() {
   const { alert, setAlert } = useContext(ProductContext);
@@ -46,7 +46,7 @@ function RegisterPage() {
 
   const onSubmit = async ({ username, password }) => {
     try {
-      const res = await api.post(registerUser(), { username, password });
+      const res = await api.post(registerUser, { username, password });
       setAlert({
         type: "success",
         message: "ثبت نام شما با موفقیت انجام شد ",

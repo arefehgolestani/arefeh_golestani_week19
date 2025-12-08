@@ -1,6 +1,8 @@
-import styles from "./HomePage.module.css";
-import home from "../assets/image/homeimage1.png";
 import { Link } from "react-router-dom";
+
+import home from "../assets/image/homeimage1.png";
+
+import styles from "./HomePage.module.css";
 
 function HomePage() {
   return (
