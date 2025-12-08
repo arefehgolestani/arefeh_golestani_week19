@@ -1,5 +1,5 @@
 import { useContext, useRef, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 
 import avatar1 from "../assets/image/avatar1.jpg";
@@ -30,6 +30,8 @@ function ManageProductPage() {
     setModal,
     fetchProducts,
     user,
+    setUser,
+    setToken,
     search,
   } = useContext(ProductContext);
 
@@ -144,6 +146,22 @@ function ManageProductPage() {
       })
     : products;
 
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    setToken("");
+    setUser("");
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+
+    navigate("/login");
+    setAlert({
+      type: "warning",
+      message: "شما از پنل کاربری خارج شدید",
+      duration: 2000,
+    });
+  };
+
   return (
     <div>
       {alert && (
@@ -159,9 +177,9 @@ function ManageProductPage() {
           <img src={avatar1} />
           <div>
             <p>{user}</p>
-            <Link to="/login">
+            <button onClick={logoutHandler}>
               <AiOutlineLogout /> <span>خروج</span>
-            </Link>
+            </button>
           </div>
         </div>
       </div>
